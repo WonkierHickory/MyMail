@@ -42,6 +42,8 @@ void resetMail();
 
 #pragma endregion
 
+#pragma region Initialisation
+
 int main()
 {
 	std::cout << "******** My Mail Server ********" << std::endl;
@@ -51,13 +53,16 @@ int main()
 	return 0;
 }
 
-//Main Menu
+#pragma endregion
+
+#pragma region Menu
+
 void mainMenu()
 {
-	int user=0;
+	int user = 0;
 
-	#pragma region Menu Options
-	
+#pragma region Menu Options
+
 	std::cout << "******* Options ********" << std::endl;
 	std::cout << "[1]New - Draft a new email" << std::endl;
 	std::cout << "[2]Send - Send an email" << std::endl;
@@ -67,8 +72,8 @@ void mainMenu()
 	std::cout << "[6]Search By - Search by name/email" << std::endl;
 	std::cout << "[7]Reset - Reset mail server" << std::endl;
 	std::cout << "[8]Exit - Exit mail server" << std::endl;
-		 
-	#pragma endregion
+
+#pragma endregion
 
 	std::cin >> user;
 
@@ -96,7 +101,7 @@ void mainMenu()
 		break;
 	case 8:
 		break;
-		}
+	}
 }
 
 void newEmail()
@@ -133,3 +138,8 @@ void resetMail()
 {
 
 }
+
+#pragma endregion
+
+
+
