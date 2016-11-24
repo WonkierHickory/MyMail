@@ -31,3 +31,8 @@ void Attachment::setFileData(char fileData)
 {
 	Attachment::fileData = (fileData != NULL) ? fileData : 1;
 }
+
+void Attachment::print()
+{
+	std::cout << Attachment::getFileName << "." << Attachment::getFileSuffix << "\nContent: " << Attachment::getFileData << std::endl;
+}

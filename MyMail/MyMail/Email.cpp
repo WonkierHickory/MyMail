@@ -42,7 +42,7 @@ void Email::setRecipients(std::vector<User> recipients)
 
 void Email::setSubject(std::string subject)
 {
-	Email::subject = (subject.length() >= 0) ? subject : "Subject";
+	Email::subject = (subject.length() >= 0) ? subject : "";
 }
 
 void Email::setBody(std::string body)
@@ -53,4 +53,10 @@ void Email::setBody(std::string body)
 void Email::setAttachment(Attachment attachment)
 {
 	Email::attachment = attachment;
+}
+
+void Email::print()
+{
+	std::cout << "From: " << Email::getSender << "\nRecipients: " << Email::getRecipients << "\nSubject: " << Email::getSubject <<
+		"\nBody: " << Email::getBody << "\nAttachments: " << Email::getAttachment;
 }

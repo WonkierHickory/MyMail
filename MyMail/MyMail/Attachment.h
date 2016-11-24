@@ -16,6 +16,8 @@ public:
 	void setFileSuffix(std::string fileSuffix);
 	void setFileData(char fileData);
 
+	void print();
+
 private:
 	std::string fileName;
 	std::string fileSuffix;

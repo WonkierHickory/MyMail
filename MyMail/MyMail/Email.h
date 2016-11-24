@@ -28,6 +28,8 @@ public:
 	void setBody(std::string body);
 	void setAttachment(Attachment attachment);
 
+	void print();
+
 private:
 	std::string sender;
 	std::vector<User> recipients;

@@ -1,4 +1,5 @@
 #include "User.h"
+#include <iostream>
 
 User::User(std::string email, std::string password, std::string userName)
 {
@@ -30,4 +31,9 @@ void User::setPassword(std::string password)
 void User::setUserName(std::string userName)
 {
 	User::userName = (userName.length() >= 8) ? email : "Default Name";
+}
+
+void User::print()
+{
+	std::cout << "Email: " << User::getEmail << "\nPassword: " << User::getPassword << "\nName: " << User::getUserName;
 }

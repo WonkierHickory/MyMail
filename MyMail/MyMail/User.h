@@ -15,6 +15,8 @@ public:
 	void setPassword(std::string password);
 	void setUserName(std::string userName);
 
+	void print();
+
 private:
 	std::string email;
 	std::string password;
