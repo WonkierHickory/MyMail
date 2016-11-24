@@ -1,6 +1,28 @@
 #include "User.h"
 #include <iostream>
 
+#pragma region Version Control
+
+#pragma region Version 0.1
+/*
+Author : Kieran Hoey
+Student Number: D00163930
+Date: 23/11/2016
+Updates: Set up Constructors, Destructors
+*/
+#pragma endregion
+
+#pragma region Version 0.2
+/*
+Author : Kieran Hoey
+Student Number: D00163930
+Date: 24/11/2016
+Updates: Implemented Setters and print method.
+*/
+#pragma endregion
+
+#pragma endregion
+
 User::User(std::string email, std::string password, std::string userName)
 {
 	setEmail(email);
