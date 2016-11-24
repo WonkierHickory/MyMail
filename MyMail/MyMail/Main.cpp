@@ -28,6 +28,7 @@ void mainMenu();
 
 int main()
 {
+	std::cout << "My Mail Server" << std::endl;
 	mainMenu();
 
 	system("pause");
@@ -37,5 +38,22 @@ int main()
 //Main Menu
 void mainMenu()
 {
+	int check = 0;
+
+	#pragma region Menu Options
 	
+	std::cout << "New" << std::endl;
+	std::cout << "Send" << std::endl;
+	std::cout << "View" << std::endl;
+	std::cout << "Delete" << std::endl;
+	std::cout << "Delete All" << std::endl;
+	std::cout << "Search By" << std::endl;
+	std::cout << "Reset" << std::endl;
+		 
+	#pragma endregion
+
+	while (check = 0)
+	{
+		
+	}
 }

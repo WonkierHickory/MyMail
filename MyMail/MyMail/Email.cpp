@@ -56,7 +56,7 @@ void Email::setSender(std::string sender)
 
 void Email::setRecipients(std::vector<User> recipients)
 {
-	for (int i = 0; i < recipients.size(); i++)
+	for (int i = 0; i <= recipients.size(); i++)
 	{
 
 	}
@@ -79,6 +79,6 @@ void Email::setAttachment(Attachment attachment)
 
 void Email::print()
 {
-	std::cout << "From: " << Email::getSender << "\nRecipients: " << Email::getRecipients << "\nSubject: " << Email::getSubject <<
-		"\nBody: " << Email::getBody << "\nAttachments: " << Email::getAttachment;
+	std::cout << "From: " << sender << "\nRecipients: " /*<< recipients*/ << "\nSubject: " << subject <<
+		"\nBody: " << body << "\nAttachments: " /*<< attachment*/;
 }

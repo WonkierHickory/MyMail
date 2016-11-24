@@ -57,5 +57,5 @@ void User::setUserName(std::string userName)
 
 void User::print()
 {
-	std::cout << "Email: " << User::getEmail << "\nPassword: " << User::getPassword << "\nName: " << User::getUserName;
+	std::cout << "Email: " << email << "\nPassword: " << password << "\nName: " << userName;
 }

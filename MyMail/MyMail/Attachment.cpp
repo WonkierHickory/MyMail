@@ -17,6 +17,7 @@ Author : Kieran Hoey
 Student Number: D00163930
 Date: 24/11/2016
 Updates: Implemented Setters and print method.
+bugs: Won't let me print objects as required.
 */
 #pragma endregion
 
@@ -56,5 +57,5 @@ void Attachment::setFileData(char fileData)
 
 void Attachment::print()
 {
-	std::cout << Attachment::getFileName << "." << Attachment::getFileSuffix << "\nContent: " << Attachment::getFileData << std::endl;
+	//std::cout << fileName << "." << fileSuffix << "\nContent: " << fileData << std::endl;
 }
