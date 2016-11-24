@@ -11,6 +11,13 @@
 
 #pragma region Method Declarations
 void mainMenu();
+void newEmail();
+void sendMail();
+void viewEmails();
+void deleteEmail();
+void deleteAllEmails();
+void searchBy();
+void resetMail();
 #pragma endregion
 
 #pragma region Version Control
@@ -24,11 +31,20 @@ void mainMenu();
 	*/
 #pragma endregion
 
+#pragma region Version 0.2
+	/*
+	Author : Kieran Hoey
+	Student Number: D00163930
+	Date: 24/11/2016
+	Updates: Set up main menu UI. Replaced if statement with switch.
+	*/
+#pragma endregion
+
 #pragma endregion
 
 int main()
 {
-	std::cout << "My Mail Server" << std::endl;
+	std::cout << "******** My Mail Server ********" << std::endl;
 	mainMenu();
 
 	system("pause");
@@ -38,22 +54,82 @@ int main()
 //Main Menu
 void mainMenu()
 {
-	int check = 0;
+	int user=0;
 
 	#pragma region Menu Options
 	
-	std::cout << "New" << std::endl;
-	std::cout << "Send" << std::endl;
-	std::cout << "View" << std::endl;
-	std::cout << "Delete" << std::endl;
-	std::cout << "Delete All" << std::endl;
-	std::cout << "Search By" << std::endl;
-	std::cout << "Reset" << std::endl;
+	std::cout << "******* Options ********" << std::endl;
+	std::cout << "[1]New - Draft a new email" << std::endl;
+	std::cout << "[2]Send - Send an email" << std::endl;
+	std::cout << "[3]View - View emails" << std::endl;
+	std::cout << "[4]Delete - Delete an email" << std::endl;
+	std::cout << "[5]Delete All - Delete all emails" << std::endl;
+	std::cout << "[6]Search By - Search by name/email" << std::endl;
+	std::cout << "[7]Reset - Reset mail server" << std::endl;
+	std::cout << "[8]Exit - Exit mail server" << std::endl;
 		 
 	#pragma endregion
 
-	while (check = 0)
-	{
-		
-	}
+	std::cin >> user;
+
+	switch (user) {
+	case 1:
+		newEmail();
+		break;
+	case 2:
+		sendMail();
+		break;
+	case 3:
+		viewEmails();
+		break;
+	case 4:
+		deleteEmail();
+		break;
+	case 5:
+		deleteAllEmails();
+		break;
+	case 6:
+		searchBy();
+		break;
+	case 7:
+		resetMail();
+		break;
+	case 8:
+		break;
+		}
+}
+
+void newEmail()
+{
+
+}
+
+void sendMail()
+{
+
+}
+
+void viewEmails()
+{
+
+}
+
+void deleteEmail()
+{
+
+}
+
+void deleteAllEmails()
+{
+
+}
+
+void searchBy()
+{
+
+}
+
+void resetMail()
+{
+
 }
