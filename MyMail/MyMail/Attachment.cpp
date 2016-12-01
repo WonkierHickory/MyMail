@@ -1,4 +1,5 @@
 #include "Attachment.h"
+#include <iostream>
 
 #pragma region Version Control
 
@@ -18,6 +19,15 @@ Student Number: D00163930
 Date: 24/11/2016
 Updates: Implemented Setters and print method.
 bugs: Won't let me print objects as required.
+*/
+#pragma endregion
+
+#pragma region Version 0.3
+/*
+Author : Kieran Hoey
+Student Number: D00163930
+Date: 1/12/2016
+Updates: Fixed Attachment print method
 */
 #pragma endregion
 
@@ -57,5 +67,5 @@ void Attachment::setFileData(char fileData)
 
 void Attachment::print()
 {
-	//std::cout << fileName << "." << fileSuffix << "\nContent: " << fileData << std::endl;
+	std::cout << fileName << "." << fileSuffix << "\nContent: " << fileData << std::endl;
 }

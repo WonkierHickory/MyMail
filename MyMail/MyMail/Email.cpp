@@ -1,4 +1,5 @@
 #include "Email.h"
+#include <iostream>
 
 #pragma region Version Control
 
