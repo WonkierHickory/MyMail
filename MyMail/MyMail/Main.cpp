@@ -18,6 +18,7 @@ void deleteEmail();
 void deleteAllEmails();
 void searchBy();
 void resetMail();
+void demoEmail();
 #pragma endregion
 
 #pragma region Version Control
@@ -47,7 +48,9 @@ void resetMail();
 int main()
 {
 	std::cout << "******** My Mail Server ********" << std::endl;
-	mainMenu();
+	//mainMenu();
+
+	demoEmail();
 
 	system("pause");
 	return 0;
@@ -137,6 +140,21 @@ void searchBy()
 void resetMail()
 {
 
+}
+
+#pragma endregion
+
+#pragma region Demo
+
+void demoEmail()
+{
+	std::vector<User> demo;
+
+	Attachment demoA;
+
+	Email e = Email("Kieran", demo, "blah", "blah blah", demoA);
+
+	e.print();
 }
 
 #pragma endregion
