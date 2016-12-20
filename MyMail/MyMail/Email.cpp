@@ -54,10 +54,21 @@ Updates: Added Overload operators
 */
 #pragma endregion
 
+#pragma region Version 0.6
+/*
+Author : Kieran Hoey
+Student Number: D00163930
+Date: 5/12/2016
+Updates: Fixed print methods to print vector of Recipients and Attachments
+*/
+#pragma endregion
+
 
 #pragma endregion
 
 int Email::emailCount = 0;
+void printRecipients(std::vector<std::string> recipients);
+void printAttachments(std::vector<Attachment> attachment);
 
 Email::Email(std::string sender, std::vector<std::string> recipients, std::string subject, std::string body, std::vector<Attachment> attachment)
 {
@@ -164,8 +175,28 @@ std::time_t Email::getDate()
 
 void Email::print()
 {
-	std::cout << "From: " << sender << "\nRecipients: " /*<< recipients*/ << "\nDate & Time: " << std::put_time(localtime(&date), "%F %T") << "\nSubject: " << subject <<
-		"\nBody: " << body << "\nAttachments: " /*<< attachment*/ << std::endl;
+	std::cout << "From: " << sender << "\nRecipients: "; 
+	printRecipients(recipients);
+	std::cout << "\nDate & Time: " << std::put_time(localtime(&date), "%F %T") << "\nSubject: " << subject <<
+		"\nBody: " << body << "\nAttachments: ";
+	printAttachments(attachment);
+	std::cout << std::endl;
+}
+
+void printRecipients(std::vector<std::string> recipients)
+{
+	for (std::string r : recipients)
+	{
+		std::cout << r << ", ";
+	}
+}
+
+void printAttachments(std::vector<Attachment> attachment)
+{
+	for (Attachment a : attachment)
+	{
+		a.print();
+	}
 }
 
 

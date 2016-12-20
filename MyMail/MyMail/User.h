@@ -2,8 +2,6 @@
 #include <string>
 #include <stack>
 #include <vector>
-#include <map>
-#include <iostream>
 
 #include "Email.h"
 #include "MailType.h"
@@ -65,12 +63,15 @@ public:
 	std::string getEmail() { return email; }
 	std::string getPassword() { return password; }
 	std::string getUserName() { return userName; }
-	std::stack<Email, std::vector<Email>> getInbox() { return inbox; }
+	std::stack<Email*, std::vector<Email*>> getInbox() { return inbox; }
 
 
-	void createNewEmail(Email email);
+	void createNewEmail(Email *email);
 	
 	void print();
+	void printMail(MailType mailType);
+	std::stack<Email*, std::vector<Email*>>* getMailType(MailType mailType);
+
 
 	bool regexValidate(std::string expression, std::string email);
 
@@ -79,8 +80,7 @@ public:
 	bool operator!=(const User& other);
 
 private:
-	std::stack<Email, std::vector<Email>> inbox; 
-	std::stack<Email, std::vector<Email>> outbox;
+	std::stack<Email*, std::vector<Email*>> inbox, outbox;
 	std::string email;
 	std::string password;
 	std::string userName;

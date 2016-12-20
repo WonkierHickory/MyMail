@@ -72,7 +72,7 @@ void Attachment::setFileSuffix(std::string fileSuffix)
 
 void Attachment::print()
 {
-	std::cout << fileName << "." << fileSuffix << std::endl;
+	std::cout << fileName << "." << fileSuffix << ", ";
 }
 
 

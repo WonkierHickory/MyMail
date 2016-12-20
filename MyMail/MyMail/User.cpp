@@ -45,11 +45,11 @@ Updates: Added Overload operators
 
 #pragma endregion
 
-User::User(std::string email, std::string password, std::string userName)
+User::User(std::string userName, std::string password, std::string email)
 {
+	setUserName(userName);
 	setEmail(email);
 	setPassword(password);
-	setUserName(userName);
 }
 
 User::User()
@@ -59,7 +59,21 @@ User::User()
 
 User::~User()
 {
+	size_t size = User::inbox.size();
+	while (size > 0)
+	{
+		inbox.top() = nullptr;
+		inbox.pop();
+		size--;
+	}
 
+	size = User::outbox.size();
+	while (size > 0)
+	{
+		outbox.top() = nullptr;
+		outbox.pop();
+		size--;
+	}
 }
 
 void User::setEmail(std::string email)
@@ -103,19 +117,60 @@ void User::setPassword(std::string password)
 
 void User::setUserName(std::string userName)
 {
-	User::userName = (userName.length() >= 8) ? email : "Default Name";
+	User::userName = (userName.length() >= 8) ? userName : "Default Name";
 }
 
 
-void User::createNewEmail(Email email)
+void User::createNewEmail(Email *email)
 {
 	User::outbox.push(email);
 }
 
 void User::print()
 {
-	std::cout << "Email: " << email << "\nPassword: " << password << "\nName: " << userName;
+	std::cout << "Email: " << email << "\nPassword: " << password << "\nName: " << userName << std::endl;
 }
+
+
+void User::printMail(MailType mailType)
+{
+	std::stack<Email*, std::vector<Email*>>* mailCat = User::getMailType(mailType), mailTemp;
+	size_t size = mailCat->size();
+
+	std::cout << "*********************************" << std::endl;
+	while (size > 0)
+	{
+		mailCat->top()->print();
+		std::cout << "--------------------------------" << std::endl;
+		mailTemp.push(mailCat->top());
+		mailCat->pop();
+		size = mailCat->size();
+	}
+	std::cout << "*********************************" << std::endl;
+
+	size = mailTemp.size();
+	while (size > 0)
+	{
+		mailCat->push(mailTemp.top());
+		mailTemp.pop();
+		size = mailTemp.size();
+	}
+}
+
+std::stack<Email*, std::vector<Email*>>* User::getMailType(MailType mailType)
+{
+	switch (mailType)
+	{
+	case Inbox:
+		return &inbox;
+		break;
+	default:
+		return &outbox;
+		break;
+	}
+}
+
+
 
 
 
