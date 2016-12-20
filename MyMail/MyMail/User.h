@@ -82,7 +82,9 @@ public:
 	std::stack<Email*, std::vector<Email*>>* getMailType(MailType mailType);
 
 	bool deleteEmail(MailType mailType, unsigned int emailId);
-	bool User::deleteAllEmails(MailType mailType);
+	bool deleteAllEmails(MailType mailType);
+	Email* searchByID(unsigned int id, MailType mailType);
+	std::vector<Email*> searchBySubject(std::string uChoice, MailType mailType);
 
 
 	bool regexValidate(std::string expression, std::string email);

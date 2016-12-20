@@ -111,6 +111,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Attachment.h" />
+    <ClInclude Include="DynamicArray.h" />
     <ClInclude Include="Email.h" />
     <ClInclude Include="MailType.h" />
     <ClInclude Include="User.h" />

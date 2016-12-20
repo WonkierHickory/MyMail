@@ -63,6 +63,7 @@ public:
 
 	std::string getSender() { return sender; }
 	std::time_t getDate();
+	std::vector<std::string> getRecipients();
 	std::string getSubject() { return subject; }
 	std::string getBody() { return body; }
 	std::vector<Attachment> getAttachment() { return attachment; }
@@ -89,7 +90,7 @@ private:
 	std::vector<std::string> recipients;
 	std::time_t date;
 	std::string subject;
-	std::string body;	
+	std::string body;
 	std::vector<Attachment> attachment;
 
 	unsigned int id;

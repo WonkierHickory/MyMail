@@ -173,6 +173,11 @@ std::time_t Email::getDate()
 	return Email::date;
 }
 
+std::vector<std::string> Email::getRecipients()
+{
+	return recipients;
+}
+
 void Email::print()
 {
 	std::cout << "From: " << sender << "\nRecipients: "; 

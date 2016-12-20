@@ -4,6 +4,7 @@
 #include "Email.h"
 #include "Attachment.h"
 #include "MailType.h"
+#include "DynamicArray.h"
 
 #include <iostream>
 #include <string>
@@ -12,13 +13,17 @@
 
 
 #pragma region Method Declarations
+User logIn();
 void mainMenu(User *activeUser);
 void newEmail(User *activeUser);
 void viewEmails(User *activeUser);
 void deleteEmail(User *activeUser);
 void deleteAllEmails(User *activeUser);
-void searchBy();
+void searchByMailType(User *activeUser);
+void searchTypes(User *activeUser, MailType mailType);
 void resetMail(User *activeUser);
+
+void sortMenu(User *activeUser, MailType mailType);
 
 std::vector<Attachment> addAttachments(int aCount);
 
@@ -92,15 +97,39 @@ void demoAttachment();
 	*/
 #pragma endregion
 
+#pragma region Version 0.7
+	/*
+	Author : Kieran Hoey
+	Student Number: D00163930
+	Date: 18/12/2016
+	Updates: Added search methods for id and subject matter
+	*/
+#pragma endregion
+
+#pragma region Version 0.7
+	/*
+	Author : Kieran Hoey
+	Student Number: D00163930
+	Date: 19/12/2016
+	Updates: Added User log in
+	*/
+#pragma endregion
+
 #pragma endregion
 
 
 
 #pragma region Initialisation
 
+//template<typename T>
+//void selectionSort(std::vector<T*> vector, bool(*funct)(T*, T*), int length);
+
+
 int main()
 {
-	User activeUser("Kieran Hoey", "Password1", "KieranHoey1995@gmail.com");
+	User activeUser;
+
+	activeUser = logIn();
 
 	std::cout << "******** My Mail Server ********" << std::endl;
 	mainMenu(&activeUser);
@@ -114,6 +143,57 @@ int main()
 	system("pause");
 	return 0;
 }
+
+User logIn()
+{
+	std::string userName, password, email;
+
+	std::cout << "Enter User Name: ";
+	std::getline(std::cin, userName);
+	std::cout << "Enter password: ";
+	std::cin >> password;
+	std::cout << "Enter Email Address: ";
+	std::cin >> email;
+
+	User activeUser(userName, password, email);
+
+	return activeUser;
+}
+
+//template<typename T>
+//void selectionSort(std::vector<T*> vector, bool(*funct)(T*, T*), int length)
+//{
+//	if (length <= 0)
+//		return;
+//
+//	for (int i = 0; i < length - 1; i++)
+//	{
+//		int minPos = i;
+//		for (int j = i + 1; j < length; j++)
+//		{
+//			if (funct)
+//				minPos = j;
+//		}
+//		if (minPos != i)
+//			swap(vector, minPos, i);
+//	}
+//}
+//
+//bool subjectGreaterThan(Email * e1, Email * e2)
+//{
+//	if (e1->getSubject() > e2->getSubject())
+//		return true;
+//	else
+//		return false;
+//}
+//
+//bool recipientsGreaterThan(Email * e1, Email * e2)
+//{
+//	if (e1->getRecipients().size() >= e2->getRecipients().size())
+//		return true;
+//	else
+//		return false;
+//}
 
 #pragma endregion
 
@@ -134,6 +214,7 @@ void mainMenu(User *activeUser)
 		std::cout << "[4]Delete All - Delete all emails" << std::endl;
 		std::cout << "[5]Search By - Search by id/email" << std::endl;
 		std::cout << "[6]Reset - Reset mail server" << std::endl;
+		//std::cout << "[7]Sort - Sort Emails" << std::endl;
 		std::cout << "[7]Exit - Exit mail server" << std::endl;
 
 #pragma endregion
@@ -154,11 +235,14 @@ void mainMenu(User *activeUser)
 			deleteAllEmails(activeUser);
 			break;
 		case 5:
-			searchBy();
+			searchByMailType(activeUser);
 			break;
 		case 6:
 			resetMail(activeUser);
 			break;
+		//case 7:
+		//	sortMenu(activeUser, Outbox);
+		//	break;
 		case 7:
 			exit = 1;
 			break;
@@ -166,6 +250,47 @@ void mainMenu(User *activeUser)
 	}
 	
 }
+
+//void sortMenu(User *activeUser, MailType mailType)
+//{
+//	int uCheck = 0;
+//	int menuOption;
+//	std::vector<Email*> temp;
+//	std::stack<Email*, std::vector<Email*>>* mailCat = activeUser->getMailType(mailType);
+//
+//	while (uCheck != 1)
+//	{
+//
+//		std::cout << "[1] - Sort by number of recipients" << std::endl;
+//		std::cout << "[2] - Back to Main Menu" << std::endl;
+//		std::cin >> menuOption;
+//
+//		bool(*pFunc)(Email*, Email*);
+//		pFunc = &subjectGreaterThan;
+//		std::vector<Email*> vec;
+//		for (int i = 0; i < mailCat->size(); i++)
+//		{
+//			vec.push_back(mailCat->top());
+//			mailCat->pop();
+//		}
+//
+//		switch (menuOption)
+//		{
+//		case 1:
+//			pFunc = &recipientsGreaterThan;
+//			std::cout << "Sort by number of recipients." << std::endl;
+//			break;
+//		default:
+//			std::cout << "Please enter an appropriate response";
+//		}
+//
+//		selectionSort(vec, pFunc, mailCat->size());
+//		for (int i = 0; i < mailCat->size(); i++)
+//		{
+//			mailCat->push(vec[i]);
+//		}
+//	}
+//}
 
 void newEmail(User *activeUser)
 {
@@ -346,23 +471,15 @@ void deleteAllEmails(User *activeUser)
 	}
 }
 
-void searchBy()
-{
-
-}
-
-
-void searchBy(User *activeUser)
+void searchByMailType(User *activeUser)
 {
 	int uCheck = 0;
-	std::string uChoice;
-	int id;
 	MailType mailType;
 	int menuOption;
 
 	while (uCheck != 1)
 	{
-		
+
 		std::cout << "[1] - Inbox" << std::endl;
 		std::cout << "[2] - Outbox" << std::endl;
 		std::cout << "[3] - Back to Main Menu" << std::endl;
@@ -372,11 +489,11 @@ void searchBy(User *activeUser)
 		{
 		case 1:
 			mailType = Inbox;
-			uCheck = 1;
+			searchTypes(activeUser, mailType);
 			break;
 		case 2:
 			mailType = Outbox;
-			uCheck = 1;
+			searchTypes(activeUser, mailType);
 			break;
 		case 3:
 			uCheck = 1;
@@ -386,45 +503,47 @@ void searchBy(User *activeUser)
 		}
 
 	}
+}
 
+void searchTypes(User *activeUser, MailType mailType)
+{
 	std::vector<Email*> temp;
+	int uCheck = 0;
+	int menuOption;
+	std::string uChoice;
+	int id;
 
-	while (uCheck != 0)
+	while (uCheck != 1)
 	{
 		std::cout << "[1] - Search by id" << std::endl;
-		std::cout << "[2] - Search by email" << std::endl;
+		std::cout << "[2] - Search by Email Subject" << std::endl;
 		std::cout << "[3] - Back to Main Menu" << std::endl;
 		std::cin >> menuOption;
 
 		switch (menuOption)
 		{
 		case 1:
+			std::cout << "Enter the id of the email you want to find" << std::endl;
 			std::cin >> id;
 			std::cout << activeUser->searchByID(id, mailType);
+			uCheck = 1;
 			break;
 		case 2:
+			std::cout << "Enter the Subject matter of the email you want to find" << std::endl;
 			std::cin >> uChoice;
-			temp = activeUser->searchByEmail(uChoice, mailType);
+			temp = activeUser->searchBySubject(uChoice, mailType);
 			for (int i = 0; i < temp.size(); i++)
 				std::cout << temp[i];
+			uCheck = 1;
 			break;
 		case 3:
-			uCheck = 0;
+			uCheck = 1;
 			break;
 		default:
 			std::cout << "Please enter an appropriate response";
 		}
 	}
 }
-
-
-
-
-
-
-
-
-
 
 void resetMail(User *activeUser)
 {
@@ -480,6 +599,4 @@ void demoAttachment()
 	a.print();
 }
 #pragma endregion
-
-
 

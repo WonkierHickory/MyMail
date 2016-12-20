@@ -221,6 +221,58 @@ bool User::deleteAllEmails(MailType mailType)
 	return true;
 }
 
+Email* User::searchByID(unsigned int id, MailType mailType)
+{
+	Email *email = nullptr;
+	std::stack<Email*, std::vector<Email*>>* mailCat = User::getMailType(mailType), mailTemp;
+	size_t size = mailCat->size();
+
+	while (size > 0)
+	{
+		if (mailCat->top()->getId() == id)
+			email = mailCat->top();
+		mailTemp.push(mailCat->top());
+		mailCat->pop();
+		size = mailCat->size();
+	}
+
+	size = mailTemp.size();
+	while (size > 0)
+	{
+		mailCat->push(mailTemp.top());
+		mailTemp.pop();
+		size = mailTemp.size();
+	}
+
+	return email;
+}
+
+std::vector<Email*> User::searchBySubject(std::string uChoice, MailType mailType)
+{
+	std::vector<Email*> emails;
+	std::stack<Email*, std::vector<Email*>>* mailCat = User::getMailType(mailType), mailTemp;
+	size_t size = User::inbox.size();
+
+	while (size > 0)
+	{
+		if (mailCat->top()->getSubject() == uChoice)
+			emails.push_back(mailCat->top());
+		mailTemp.push(mailCat->top());
+		mailCat->pop();
+		size = mailCat->size();
+	}
+
+	size = mailTemp.size();
+	while (size > 0)
+	{
+		mailCat->push(mailTemp.top());
+		mailTemp.pop();
+		size = mailTemp.size();
+	}
+
+	return emails;
+}
+
 
 
 std::ostream& operator<<(std::ostream & outStream, const User & user)
