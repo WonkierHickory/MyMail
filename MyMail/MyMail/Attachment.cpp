@@ -1,4 +1,5 @@
 #include "Attachment.h"
+
 #include <iostream>
 
 #pragma region Version Control
@@ -31,13 +32,21 @@ Updates: Fixed Attachment print method
 */
 #pragma endregion
 
+#pragma region Version 0.4
+/*
+Author : Kieran Hoey
+Student Number: D00163930
+Date: 3/12/2016
+Updates: Added Overload operators
+*/
 #pragma endregion
 
-Attachment::Attachment(std::string fileName, std::string fileSuffix, char fileData)
+#pragma endregion
+
+Attachment::Attachment(std::string fileName, std::string fileSuffix)
 {
 	setFileName(fileName);
 	setFileSuffix(fileSuffix);
-	setFileData(fileData);
 }
 
 Attachment::Attachment()
@@ -52,7 +61,7 @@ Attachment::~Attachment()
 
 void Attachment::setFileName(std::string fileName)
 {
-	Attachment::fileName = (fileName.length() >= 8) ? fileName : "banter";
+	Attachment::fileName = (fileName.length() >= 8) ? fileName : "placeholder";
 }
 
 void Attachment::setFileSuffix(std::string fileSuffix)
@@ -60,12 +69,46 @@ void Attachment::setFileSuffix(std::string fileSuffix)
 	Attachment::fileSuffix = (fileSuffix.length() >= 2 && fileSuffix.length() <= 3) ? fileSuffix : "txt";
 }
 
-void Attachment::setFileData(char fileData)
-{
-	Attachment::fileData = (fileData != NULL) ? fileData : 1;
-}
 
 void Attachment::print()
 {
-	std::cout << fileName << "." << fileSuffix << "\nContent: " << fileData << std::endl;
+	std::cout << fileName << "." << fileSuffix << std::endl;
+}
+
+
+std::ostream& operator<<(std::ostream & outStream, const Attachment & email)
+{
+	outStream << "Name: ";
+	return outStream;
+}
+
+std::istream& operator >> (std::istream & inStream, Attachment & email)
+{
+	std::string str;
+	inStream >> str;
+	return inStream;
+}
+
+bool Attachment::operator>(const Attachment &other)
+{
+	if (Attachment::getFileName() > other.fileName)
+		return true;
+	else
+		return false;
+}
+
+bool Attachment::operator==(const Attachment & other)
+{
+	if (Attachment::getFileName() == other.fileName)
+		return true;
+	else
+		return false;
+}
+
+bool Attachment::operator!=(const Attachment & other)
+{
+	if (Attachment::getFileName() != other.fileName)
+		return true;
+	else
+		return false;
 }
