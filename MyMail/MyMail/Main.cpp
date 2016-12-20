@@ -15,8 +15,8 @@
 void mainMenu(User *activeUser);
 void newEmail(User *activeUser);
 void viewEmails(User *activeUser);
-void deleteEmail();
-void deleteAllEmails();
+void deleteEmail(User *activeUser);
+void deleteAllEmails(User *activeUser);
 void searchBy();
 void resetMail(User *activeUser);
 
@@ -83,6 +83,15 @@ void demoAttachment();
 	*/
 #pragma endregion
 
+#pragma region Version 0.6
+	/*
+	Author : Kieran Hoey
+	Student Number: D00163930
+	Date: 15/12/2016
+	Updates: Added methods for deleting emails
+	*/
+#pragma endregion
+
 #pragma endregion
 
 
@@ -97,9 +106,9 @@ int main()
 	mainMenu(&activeUser);
 
 	#pragma region demo
-	demoUser();
+	/*demoUser();
 	demoEmail();
-	demoAttachment();
+	demoAttachment();*/
 	#pragma endregion
 
 	system("pause");
@@ -123,7 +132,7 @@ void mainMenu(User *activeUser)
 		std::cout << "[2]View - View emails" << std::endl;
 		std::cout << "[3]Delete - Delete an email" << std::endl;
 		std::cout << "[4]Delete All - Delete all emails" << std::endl;
-		std::cout << "[5]Search By - Search by name/email" << std::endl;
+		std::cout << "[5]Search By - Search by id/email" << std::endl;
 		std::cout << "[6]Reset - Reset mail server" << std::endl;
 		std::cout << "[7]Exit - Exit mail server" << std::endl;
 
@@ -139,10 +148,10 @@ void mainMenu(User *activeUser)
 			viewEmails(activeUser);
 			break;
 		case 3:
-			deleteEmail();
+			deleteEmail(activeUser);
 			break;
 		case 4:
-			deleteAllEmails();
+			deleteAllEmails(activeUser);
 			break;
 		case 5:
 			searchBy();
@@ -271,20 +280,151 @@ void viewEmails(User *activeUser)
 	}
 }
 
-void deleteEmail()
+void deleteEmail(User *activeUser)
 {
+	int uCheck = 0;
+	int uChoice;
+	int menuOption;
 
+	while (uCheck != 1)
+	{
+		std::cout << "[1] - Delete email from Inbox" << std::endl;
+		std::cout << "[2] - Delete email from Outbox" << std::endl;
+		std::cout << "[3] - Back to Main Menu" << std::endl;
+		std::cin >> menuOption;
+
+		switch (menuOption)
+		{
+		case 1:
+			std::cout << "Enter the id of the email you want to delete:" << std::endl;
+			std::cin >> uChoice;
+			activeUser->deleteEmail(Inbox, uChoice);
+			break;
+		case 2:
+			std::cout << "Enter the id of the email you want to delete:" << std::endl;
+			std::cin >> uChoice;
+			activeUser->deleteEmail(Outbox, uChoice);
+			break;
+		case 3:
+			uCheck = 1;
+			break;
+		default:
+			std::cout << "Please enter an appropriate response" << std::endl;
+		}
+	}
 }
 
-void deleteAllEmails()
+void deleteAllEmails(User *activeUser)
 {
+	int uCheck = 0;
+	int uChoice;
+	int menuOption;
 
+	while (uCheck != 1)
+	{
+		std::cout << "[1] - Delete all emails from the Inbox" << std::endl;
+		std::cout << "[2] - Delete all emails from the Outbox" << std::endl;
+		std::cout << "[3] - Back to Main Menu" << std::endl;
+		std::cin >> menuOption;
+
+		switch (menuOption)
+		{
+		case 1:
+			std::cin >> uChoice;
+			activeUser->deleteAllEmails(Inbox);
+			break;
+		case 2:
+			std::cin >> uChoice;
+			activeUser->deleteAllEmails(Outbox);
+			break;
+		case 3:
+			uCheck = 1;
+			break;
+		default:
+			std::cout << "Please enter an appropriate response" << std::endl;
+		}
+	}
 }
 
 void searchBy()
 {
 
 }
+
+
+void searchBy(User *activeUser)
+{
+	int uCheck = 0;
+	std::string uChoice;
+	int id;
+	MailType mailType;
+	int menuOption;
+
+	while (uCheck != 1)
+	{
+		
+		std::cout << "[1] - Inbox" << std::endl;
+		std::cout << "[2] - Outbox" << std::endl;
+		std::cout << "[3] - Back to Main Menu" << std::endl;
+		std::cin >> menuOption;
+
+		switch (menuOption)
+		{
+		case 1:
+			mailType = Inbox;
+			uCheck = 1;
+			break;
+		case 2:
+			mailType = Outbox;
+			uCheck = 1;
+			break;
+		case 3:
+			uCheck = 1;
+			break;
+		default:
+			std::cout << "Please enter an appropriate response" << std::endl;
+		}
+
+	}
+
+	std::vector<Email*> temp;
+
+	while (uCheck != 0)
+	{
+		std::cout << "[1] - Search by id" << std::endl;
+		std::cout << "[2] - Search by email" << std::endl;
+		std::cout << "[3] - Back to Main Menu" << std::endl;
+		std::cin >> menuOption;
+
+		switch (menuOption)
+		{
+		case 1:
+			std::cin >> id;
+			std::cout << activeUser->searchByID(id, mailType);
+			break;
+		case 2:
+			std::cin >> uChoice;
+			temp = activeUser->searchByEmail(uChoice, mailType);
+			for (int i = 0; i < temp.size(); i++)
+				std::cout << temp[i];
+			break;
+		case 3:
+			uCheck = 0;
+			break;
+		default:
+			std::cout << "Please enter an appropriate response";
+		}
+	}
+}
+
+
+
+
+
+
+
+
+
 
 void resetMail(User *activeUser)
 {

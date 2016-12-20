@@ -43,6 +43,15 @@ Updates: Added Overload operators
 */
 #pragma endregion
 
+#pragma region Version 0.5
+/*
+Author : Kieran Hoey
+Student Number: D00163930
+Date: 15/12/2016
+Updates: Added additional method definitions
+*/
+#pragma endregion
+
 #pragma endregion
 
 User::User(std::string userName, std::string password, std::string email)
@@ -170,7 +179,47 @@ std::stack<Email*, std::vector<Email*>>* User::getMailType(MailType mailType)
 	}
 }
 
+bool User::deleteEmail(MailType mailType, unsigned int emailId)
+{
+	std::stack<Email*, std::vector<Email*>>* mailCat = User::getMailType(mailType), mailTemp;
+	size_t size = mailCat->size();
+	size_t comparison = size;
 
+	while (size > 0)
+	{
+		if (mailCat->top()->getId() != emailId)
+		{
+			mailTemp.push(mailCat->top());
+		}
+		mailCat->pop();
+		size = mailCat->size();
+	}
+	size = mailTemp.size();
+	while (size > 0)
+	{
+		mailCat->push(mailTemp.top());
+		mailTemp.pop();
+		size = mailTemp.size();
+	}
+
+	if (comparison != mailCat->size())		
+		return true;
+	else
+		return false;
+}
+
+bool User::deleteAllEmails(MailType mailType)
+{
+	std::stack<Email*, std::vector<Email*>>* mailCat = User::getMailType(mailType), mailTemp;
+	size_t size = mailCat->size();
+	size_t comparison = size;
+	while (size > 0)
+	{
+		mailCat->pop();
+		size = mailCat->size();
+	}
+	return true;
+}
 
 
 

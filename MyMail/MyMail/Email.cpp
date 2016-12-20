@@ -66,7 +66,7 @@ Updates: Fixed print methods to print vector of Recipients and Attachments
 
 #pragma endregion
 
-int Email::emailCount = 0;
+int Email::emailCount = 1;
 void printRecipients(std::vector<std::string> recipients);
 void printAttachments(std::vector<Attachment> attachment);
 

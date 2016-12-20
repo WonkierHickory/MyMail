@@ -66,7 +66,7 @@ public:
 	std::string getSubject() { return subject; }
 	std::string getBody() { return body; }
 	std::vector<Attachment> getAttachment() { return attachment; }
-	unsigned int getId() { id; }
+	unsigned int getId() { return id; }
 
 
 	void setId(unsigned int id) { Email::id = id; }
@@ -79,7 +79,6 @@ public:
 	void print();
 
 	bool regexValidateEmail(std::string expression, std::string email);
-
 
 	bool operator>(const Email& other);
 	bool operator==(const Email& other);

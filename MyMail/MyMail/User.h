@@ -44,6 +44,15 @@ Updates: Added Overload operators
 */
 #pragma endregion
 
+#pragma region Version 0.5
+/*
+Author : Kieran Hoey
+Student Number: D00163930
+Date: 16/12/2016
+Updates: Added method declarations
+*/
+#pragma endregion
+
 #pragma endregion
 
 class User
@@ -71,6 +80,9 @@ public:
 	void print();
 	void printMail(MailType mailType);
 	std::stack<Email*, std::vector<Email*>>* getMailType(MailType mailType);
+
+	bool deleteEmail(MailType mailType, unsigned int emailId);
+	bool User::deleteAllEmails(MailType mailType);
 
 
 	bool regexValidate(std::string expression, std::string email);
